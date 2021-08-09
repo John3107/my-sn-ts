@@ -4,7 +4,6 @@ import {sendMessageCreator, updateNewMessageBodyCreator}
 import StoreContext from '../../StoreContext';
 import Dialogs from "./Dialogs";
 
-
 const DialogsContainer = (props: any) => {
     return <StoreContext.Consumer>
         { store => {
