@@ -1,6 +1,11 @@
-import {ActionsType, NavbarPageType} from "./store";
+import {ActionsType, FriendsType} from "./store";
 
-export let initialState = {
+export type initialStateType = {
+    friends: Array<FriendsType>
+}
+
+
+export let initialState: initialStateType = {
     friends: [
         {id: 1, name: 'Dmitriy'},
         {id: 2, name: 'Ivan'},
@@ -8,8 +13,7 @@ export let initialState = {
     ],
 }
 
-const navbarReducer = (state: NavbarPageType = initialState, action: ActionsType) => {
-
+const navbarReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
     return state;
 }
 

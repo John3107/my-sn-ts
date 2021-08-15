@@ -1,14 +1,16 @@
 import React, {ChangeEvent, MouseEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {PostsType} from "../../../redux/profile-reduser";
 
-import {PostsType} from "../../../redux/store";
+
 
 type MyPostsPropsType = {
     updateNewPostText: (text: string) => void
     addPost: (e: MouseEvent<HTMLButtonElement>, text: string) => void
     posts: PostsType[]
     newPostText: string
+
 }
 
 

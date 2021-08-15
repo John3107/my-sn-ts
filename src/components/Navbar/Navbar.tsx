@@ -2,11 +2,11 @@ import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
 import React from "react";
-import StoreContext from '../../StoreContext';
+import store from '../../redux/store';
+
 
 const Navbar = (props: any) => {
-    return <StoreContext.Consumer>
-        {store => {
+
             let friendsElements = store.getState().navbarPage.friends.map(f =>
                 <Friends name={f.name} id={f.id}/>);
             return <nav className={s.nav}>
@@ -30,8 +30,6 @@ const Navbar = (props: any) => {
                     {friendsElements}
                 </div>
             </nav>
-        }
-        }
-    </StoreContext.Consumer>
+
 }
 export default Navbar;

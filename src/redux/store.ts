@@ -2,7 +2,7 @@ import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} fr
 import messagesReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./messages-reduser";
 import navbarReducer from "./navbar-reduser";
 
-let store: StoreType = {
+export let store: StoreType = {
     getState() {
         return this._state
     },
@@ -58,14 +58,15 @@ let store: StoreType = {
     }
 }
 
-type MessagesType = {
+export type MessagesType = {
     id: number
     message: string
 };
-type DialogsType = {
+export type DialogsType = {
     id: number
     name: string
 };
+
 export type PostsType = {
     id: number
     message: string
