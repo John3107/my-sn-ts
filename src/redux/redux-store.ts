@@ -3,6 +3,7 @@ import profileReducer from "./profile-reduser";
 import messagesReducer from "./messages-reduser";
 import navbarReducer from "./navbar-reduser";
 import {ActionsType, StateType} from "./store";
+import usersReducer from "./users-reduser";
 
 export type StoreType = {
     getState: () => StateType
@@ -15,7 +16,8 @@ export type StoreType = {
 let rootReducer = combineReducers({
     profilePage: profileReducer,
     messagesPage: messagesReducer,
-    navbarPage: navbarReducer
+    navbarPage: navbarReducer,
+    users: usersReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>;
