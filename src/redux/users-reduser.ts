@@ -5,22 +5,34 @@ const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
 
+
+/*
 type LocationType = {
     country: string
     city: string
 }
+*/
 
-export type UsersType = {
+type PhotosType = {
+    small: string
+    large: string
+}
+
+export type ItemsType = {
     id: number
     photoURL: string
     followed: boolean
-    fullName: string
     status: string
-    location: LocationType
+    // location: LocationType
+    name: string
+    photos: PhotosType
+    totalCount: number
+    error: string
 }
 
+
 export type InitialStateType = {
-    users: UsersType[]
+    users: ItemsType[]
 }
 
 let initialState: InitialStateType = {
@@ -59,6 +71,6 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
 
 export const followAC = (userId: number) => ({type: FOLLOW, userId} as const)
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const)
-export const setUsersAC = (users: UsersType[]) => ({type: SET_USERS, users} as const)
+export const setUsersAC = (users: ItemsType[]) => ({type: SET_USERS, users} as const)
 
 export default usersReducer;
