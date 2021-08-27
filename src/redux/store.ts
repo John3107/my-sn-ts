@@ -1,7 +1,14 @@
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reduser";
 import messagesReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./messages-reduser";
 import navbarReducer from "./navbar-reduser";
-import {followAC, setUsersAC, unfollowAC} from "./users-reduser";
+import {
+    followAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
+    setUsersAC,
+    toggleIsFetchingAC,
+    unfollowAC
+} from "./users-reduser";
 
 export let store: StoreType = {
     getState() {
@@ -109,7 +116,11 @@ export type ActionsType = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof followAC> |
     ReturnType<typeof unfollowAC> |
     ReturnType<typeof setUsersAC> |
-    ReturnType<typeof updateNewMessageBodyCreator>
+    ReturnType<typeof updateNewMessageBodyCreator> |
+    ReturnType<typeof setCurrentPageAC> |
+    ReturnType<typeof setTotalUsersCountAC> |
+    ReturnType<typeof toggleIsFetchingAC>
+
 
 
 
