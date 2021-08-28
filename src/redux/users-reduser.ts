@@ -10,7 +10,7 @@ const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
 
 
 
-type PhotosType = {
+export type PhotosType = {
     small: string
     large: string
 }
@@ -79,17 +79,17 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
     }
 }
 
-export const followAC = (userId: number) =>
+export const follow = (userId: number) =>
     ({type: FOLLOW, userId} as const)
-export const unfollowAC = (userId: number) =>
+export const unfollow = (userId: number) =>
     ({type: UNFOLLOW, userId} as const)
-export const setUsersAC = (users: ItemsType[]) =>
+export const setUsers = (users: ItemsType[]) =>
     ({type: SET_USERS, users} as const)
-export const setCurrentPageAC = (currentPage: number) =>
+export const setCurrentPage = (currentPage: number) =>
     ({type: SET_CURRENT_PAGE, currentPage} as const)
-export const setTotalUsersCountAC = (totalUsersCount: number) =>
+export const setTotalUsersCount = (totalUsersCount: number) =>
     ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount} as const)
-export const toggleIsFetchingAC = (isFetching: boolean) =>
+export const toggleIsFetching = (isFetching: boolean) =>
     ({type: TOGGLE_IS_FETCHING, isFetching} as const)
 
 export default usersReducer;

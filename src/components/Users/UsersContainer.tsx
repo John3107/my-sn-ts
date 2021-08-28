@@ -1,19 +1,17 @@
 import React from "react";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    unfollow
 } from "../../redux/users-reduser";
 import {connect} from "react-redux";
 import {InitialStateType, ItemsType} from "../../redux/users-reduser";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import axios from "axios";
 import Users from "./Users";
-import preloader from '../../assents/images/Pulse-1s-200px (1).svg'
 import Preloader from "../common/Preloader/Preloader";
 
 type MapStatePropsType = {
@@ -84,29 +82,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId))
-        },
-
-        setUsers: (users: ItemsType[]) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        },
-
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+    follow, unfollow, setUsers, setCurrentPage,
+    setTotalUsersCount, toggleIsFetching,
+})(UsersContainer);
