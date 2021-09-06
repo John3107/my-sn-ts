@@ -7,7 +7,7 @@ const SET_USERS = 'SET-USERS'
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
-
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS'
 
 
 export type PhotosType = {
@@ -26,13 +26,13 @@ export type ItemsType = {
     error: string
 }
 
-
 export type InitialStateType = {
     users: ItemsType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 }
 
 let initialState: InitialStateType = {
@@ -41,6 +41,7 @@ let initialState: InitialStateType = {
     totalUsersCount: 3,
     currentPage: 1,
     isFetching: false,
+    followingInProgress: []
 }
 
 
@@ -67,13 +68,20 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
                 })
             }
         case SET_USERS:
-            return {...state, users: action.users }
+            return {...state, users: action.users}
         case SET_CURRENT_PAGE:
             return {...state, currentPage: action.currentPage}
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUsersCount: action.count}
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)
+            }
         default:
             return state;
     }
@@ -91,5 +99,7 @@ export const setTotalUsersCount = (totalUsersCount: number) =>
     ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount} as const)
 export const toggleIsFetching = (isFetching: boolean) =>
     ({type: TOGGLE_IS_FETCHING, isFetching} as const)
+export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) =>
+    ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId} as const)
 
 export default usersReducer;

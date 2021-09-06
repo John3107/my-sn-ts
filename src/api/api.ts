@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ItemsType} from "../redux/users-reduser";
 
 
 const instance = axios.create({
@@ -15,5 +16,24 @@ export const usersAPI = {
             .then(response => {
                 return response.data
             })
+    },
+    getUnfollow(u: ItemsType ) {
+        return instance.delete(`follow/${u.id}`)
+            .then(response => {
+                return response.data
+            })
+    },
+    getFollow(u: ItemsType ) {
+        return instance.post(`follow/${u.id}`, {},)
+            .then(response => {
+                return response.data
+            })
+    },
+    getProfile(userId: string) {
+        return instance.get(`profile/` + userId)
+            .then(response => {
+                return response.data
+            })
     }
+
 }

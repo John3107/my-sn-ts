@@ -11,7 +11,7 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
-    toggleIsFetching,
+    toggleIsFetching, toggleIsFollowingProgress,
     unfollow,
 } from "./users-reduser";
 
@@ -127,7 +127,9 @@ export type ActionsType = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
     ReturnType<typeof toggleIsFetching> |
-    ReturnType<typeof setUserProfile>
+    ReturnType<typeof setUserProfile> |
+    ReturnType<typeof toggleIsFollowingProgress>
+
 
 
 export default store;
