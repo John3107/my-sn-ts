@@ -1,5 +1,7 @@
 import {ActionsType} from "./store";
-import {ItemsType} from "./users-reduser";
+import {ItemsType, setTotalUsersCount, setUsers, toggleIsFetching} from "./users-reduser";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -89,5 +91,15 @@ export const updateNewPostTextActionCreator = (text: string) =>
     ({type: UPDATE_NEW_POST_TEXT, newText: text} as const)
 export const setUserProfile = (profile: ProfileType | null) =>
     ({type: SET_USER_PROFILE, profile} as const)
+
+
+export const profile = (userId: string) => {
+    debugger
+    return (dispatch: Dispatch) => {
+        usersAPI.getProfile(userId).then((data) => {
+            dispatch(setUserProfile(data));
+        })
+    }
+}
 
 export default profileReducer;

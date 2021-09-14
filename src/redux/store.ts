@@ -7,12 +7,12 @@ import profileReducer, {
 import messagesReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./messages-reduser";
 import navbarReducer from "./navbar-reduser";
 import {
-    follow,
+    follow, followSuccess,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
     toggleIsFetching, toggleIsFollowingProgress,
-    unfollow,
+    unfollow, unfollowSuccess,
 } from "./users-reduser";
 
 export let store: StoreType = {
@@ -120,8 +120,8 @@ export type StoreType = {
 export type ActionsType = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof sendMessageCreator> |
-    ReturnType<typeof follow> |
-    ReturnType<typeof unfollow> |
+    ReturnType<typeof followSuccess> |
+    ReturnType<typeof unfollowSuccess> |
     ReturnType<typeof setUsers> |
     ReturnType<typeof updateNewMessageBodyCreator> |
     ReturnType<typeof setCurrentPage> |
