@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Profile from "../Profile";
 import {connect} from "react-redux";
-import {profile, ProfileType} from "../../../redux/profile-reduser";
+import {getUserProfile, ProfileType} from "../../../redux/profile-reduser";
 import {RouteComponentProps, withRouter } from 'react-router';
 import {AppStateType} from "../../../redux/redux-store";
+import {Redirect} from "react-router-dom";
 
 type PathParamsType = {
     userId: string
@@ -11,36 +12,43 @@ type PathParamsType = {
 
 type MapStatePropsType = {
     profile: ProfileType | null
+    isAuth: boolean
 }
 
 type MapDispatchPropsType = {
-    profile: (userId: string) => void
-    // setUserProfile: (profile: ProfileType | null) => void
+    getUserProfile: (userId: string) => void
 }
 
 type OwnPropsType = MapStatePropsType & MapDispatchPropsType
 type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-function ProfileContainer(props: ProfileContainerPropsType) {
+class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
-    useEffect(() => {
-        let userId = props.match.params.userId;
-        if(!userId) {
+    componentDidMount() {
+        let userId = this.props.match.params.userId;
+        if (!userId) {
             userId = '2'
         }
-        profile(userId)
-    }, [])
+        this.props.getUserProfile(userId)
+    }
 
+    render() {
+        if(!this.props.isAuth) return <Redirect to='/login' />
 
-    return (
-            <Profile profile={props.profile}/>
+        return (
+            <Profile {...this.props} profile={this.props.profile}/>
         )
     }
+}
+
+
+let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
+
+})
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
-    profile: state.profilePage.profile
-})
 
-export default connect (mapStateToProps, {profile})(WithUrlDataContainerComponent);
+export default connect (mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent);

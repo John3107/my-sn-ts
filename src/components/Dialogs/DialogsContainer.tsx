@@ -1,4 +1,4 @@
-import React, {MouseEvent} from 'react';
+import React from 'react';
 import {InitialStateType, sendMessageCreator, updateNewMessageBodyCreator}
     from "../../redux/messages-reduser";
 import Dialogs from "./Dialogs";
@@ -8,6 +8,7 @@ import {Dispatch} from "redux";
 
 type mapStatePropsType = {
     messagesPage: InitialStateType
+    isAuth: boolean
 }
 
 type mapDispatchPropsType = {
@@ -17,7 +18,8 @@ type mapDispatchPropsType = {
 
 let mapStateToProps = (state: AppStateType): mapStatePropsType => {
     return {
-        messagesPage: state.messagesPage
+        messagesPage: state.messagesPage,
+        isAuth: state.auth.isAuth
     }
 }
 

@@ -10,6 +10,7 @@ import {InitialStateType} from "../../redux/users-reduser";
 import {AppStateType} from "../../redux/redux-store";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import {Redirect} from "react-router-dom";
 
 type MapStatePropsType = {
     usersPage: InitialStateType
@@ -18,6 +19,7 @@ type MapStatePropsType = {
     currentPage: number
     isFetching: boolean
     followingInProgress: number[]
+    isAuth: boolean
 }
 
 type MapDispatchPropsType = {
@@ -38,6 +40,8 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     }
 
     render() {
+        if(!this.props.isAuth) return <Redirect to={'/login'} />
+
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
@@ -60,7 +64,8 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
         totalUsersCount: state.users.totalUsersCount,
         currentPage: state.users.currentPage,
         isFetching: state.users.isFetching,
-        followingInProgress: state.users.followingInProgress
+        followingInProgress: state.users.followingInProgress,
+        isAuth: state.auth.isAuth
     }
 }
 

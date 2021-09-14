@@ -1,4 +1,5 @@
 import axios from "axios";
+import {setAuthUserData} from "../redux/auth-reduser";
 
 
 const instance = axios.create({
@@ -35,4 +36,12 @@ export const usersAPI = {
             })
     }
 
+}
+
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`, {
+            withCredentials: true
+        })
+    }
 }

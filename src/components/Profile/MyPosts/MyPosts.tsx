@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEvent} from 'react';
+import React, {MouseEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {PostsType} from "../../../redux/profile-reduser";
