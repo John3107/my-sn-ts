@@ -3,11 +3,19 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileType} from "../../redux/profile-reduser";
 
+type ProfilePropsType = {
+    profile: ProfileType | null
+    status: string
+    updateStatus: (status: string) => void
+}
 
-const Profile: React.FC<{profile: ProfileType | null}> = ({profile}) => {
+const Profile = (props: ProfilePropsType) => {
     return <div>
-        <ProfileInfo profile={profile}/>
-        <MyPostsContainer />
+        <ProfileInfo profile={props.profile}
+                     status={props.status}
+                     updateStatus={props.updateStatus}
+        />
+        <MyPostsContainer/>
     </div>
 }
 

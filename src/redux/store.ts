@@ -1,18 +1,18 @@
 import profileReducer, {
     addPostActionCreator,
-    ProfileType,
+    ProfileType, setStatus,
     setUserProfile,
     updateNewPostTextActionCreator
 } from "./profile-reduser";
 import messagesReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./messages-reduser";
 import navbarReducer from "./navbar-reduser";
 import {
-    follow, followSuccess,
+    followSuccess,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
     toggleIsFetching, toggleIsFollowingProgress,
-    unfollow, unfollowSuccess,
+    unfollowSuccess,
 } from "./users-reduser";
 
 export let store: StoreType = {
@@ -28,7 +28,8 @@ export let store: StoreType = {
                 {id: 4, message: "Dada", likesCount: 15}
             ],
             newPostText: "",
-            profile: null
+            profile: null,
+            status: ''
         },
         messagesPage: {
             dialogs: [
@@ -95,7 +96,8 @@ export type MessagesPageType = {
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
-   profile: ProfileType | null
+    profile: ProfileType | null
+    status: string
 };
 export type NavbarPageType = {
     friends: Array<FriendsType>
@@ -128,7 +130,9 @@ export type ActionsType = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setTotalUsersCount> |
     ReturnType<typeof toggleIsFetching> |
     ReturnType<typeof setUserProfile> |
-    ReturnType<typeof toggleIsFollowingProgress>
+    ReturnType<typeof toggleIsFollowingProgress> |
+    ReturnType<typeof setStatus>
+
 
 
 
