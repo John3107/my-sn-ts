@@ -1,12 +1,10 @@
 import {ActionsType} from "./store";
-import {PostsType} from "./profile-reduser";
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
 type MessagesType = {
     id: number
-    message: string
+    message: string | undefined
 };
 type DialogsType = {
     id: number
@@ -16,7 +14,6 @@ type DialogsType = {
 export type InitialStateType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
-    newMessageBody: string
 
 }
 
@@ -38,31 +35,22 @@ let initialState: InitialStateType = {
         {id: 4, message: 'Yo!'},
         {id: 5, message: 'Yo!'},
     ],
-    newMessageBody: ""
 }
 
 const messagesReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessageBody: action.body
-            };
         case SEND_MESSAGE:
-            let body = state.newMessageBody;
+            let body = action.newMessageBody;
             return {
                 ...state,
-                newMessageBody: '',
                 messages: [...state.messages, {id: 6, message: body}]
             };
         default:
             return state;
     }
 }
-export const sendMessageCreator = () =>
-    ({type: SEND_MESSAGE} as const)
+export const sendMessageCreator = (newMessageBody: string | undefined) =>
+    ({type: SEND_MESSAGE, newMessageBody} as const)
 
-export const updateNewMessageBodyCreator = (body: string) =>
-    ({type: UPDATE_NEW_MESSAGE_BODY, body} as const)
 
 export default messagesReducer;

@@ -1,10 +1,9 @@
-import profileReducer, {
+import  {
     addPostActionCreator,
     ProfileType, setStatus,
-    setUserProfile,
-    updateNewPostTextActionCreator
+    setUserProfile
 } from "./profile-reduser";
-import messagesReducer, {sendMessageCreator, updateNewMessageBodyCreator} from "./messages-reduser";
+import {sendMessageCreator} from "./messages-reduser";
 import navbarReducer from "./navbar-reduser";
 import {
     followSuccess,
@@ -65,8 +64,6 @@ export let store: StoreType = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
         this._state.navbarPage = navbarReducer(this._state.navbarPage, action)
 
         this._callSubscriber(this._state)
@@ -120,12 +117,10 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 export type ActionsType = ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof sendMessageCreator> |
     ReturnType<typeof followSuccess> |
     ReturnType<typeof unfollowSuccess> |
     ReturnType<typeof setUsers> |
-    ReturnType<typeof updateNewMessageBodyCreator> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
     ReturnType<typeof toggleIsFetching> |
