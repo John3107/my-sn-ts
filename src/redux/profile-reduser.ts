@@ -91,20 +91,20 @@ export const setStatus = (status: string) =>
     ({type: SET_STATUS, status} as const)
 
 
-export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+export const getUserProfile = (userId: string) => (dispatch: Dispatch<ActionsType>) => {
     usersAPI.getProfile(userId).then((res) => {
         dispatch(setUserProfile(res.data));
     })
 }
 
-export const getStatus = (userId: string) => (dispatch: Dispatch) => {
+export const getStatus = (userId: string) => (dispatch: Dispatch<ActionsType>) => {
     profileAPI.getStatus(userId)
         .then((res) => {
             dispatch(setStatus(res.data));
         })
 }
 
-export const updateStatus = (status: string) => (dispatch: Dispatch) => {
+export const updateStatus = (status: string) => (dispatch: Dispatch<ActionsType>) => {
     profileAPI.updateStatus(status)
         .then((res) => {
             if (res.data.resultCode === 0) {

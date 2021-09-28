@@ -13,6 +13,7 @@ import {
     toggleIsFetching, toggleIsFollowingProgress,
     unfollowSuccess,
 } from "./users-reduser";
+import {setAuthUserData} from "./auth-reduser";
 
 export let store: StoreType = {
     getState() {
@@ -126,7 +127,8 @@ export type ActionsType = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof toggleIsFetching> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof toggleIsFollowingProgress> |
-    ReturnType<typeof setStatus>
+    ReturnType<typeof setStatus> |
+    ReturnType<typeof setAuthUserData>
 
 
 
