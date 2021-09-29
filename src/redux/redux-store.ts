@@ -4,8 +4,9 @@ import messagesReducer from "./messages-reduser";
 import navbarReducer from "./navbar-reduser";
 import usersReducer from "./users-reduser";
 import authReducer from "./auth-reduser";
-import thunkMiddleware from 'redux-thunk';
+import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form'
+import {ActionsType} from "./store";
 
 
 let rootReducer = combineReducers({
@@ -18,6 +19,8 @@ let rootReducer = combineReducers({
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>;
+
+export type ThunkType<ReturnType = void> = ThunkAction<void, AppStateType, unknown, ActionsType>
 
 export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 

@@ -1,6 +1,7 @@
 import {ActionsType} from "./store";
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {ThunkType} from "./redux-store";
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -115,9 +116,9 @@ export const getUsers = (currentPage: number, pageSize: number) => {
     }
 }
 
-export const follow = (userId: number) => {
+export const follow = (userId: number): ThunkType => {
 
-    return (dispatch: Dispatch<ActionsType>) => {
+    return (dispatch) => {
         dispatch(toggleIsFollowingProgress(true, userId))
         usersAPI.getFollow(userId)
             .then(data => {
@@ -129,9 +130,9 @@ export const follow = (userId: number) => {
     }
 }
 
-export const unfollow = (userId: number) => {
+export const unfollow = (userId: number): ThunkType => {
 
-    return (dispatch: Dispatch<ActionsType>) => {
+    return (dispatch) => {
         dispatch(toggleIsFollowingProgress(true, userId))
         usersAPI.getUnfollow(userId)
             .then(data => {

@@ -15,6 +15,7 @@ import {
 } from "./users-reduser";
 import {setAuthUserData} from "./auth-reduser";
 
+
 export let store: StoreType = {
     getState() {
         return this._state
@@ -129,6 +130,7 @@ export type ActionsType = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof toggleIsFollowingProgress> |
     ReturnType<typeof setStatus> |
     ReturnType<typeof setAuthUserData>
+
 
 
 

@@ -1,6 +1,6 @@
 import {ActionsType} from "./store";
-import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
+import {ThunkType} from "./redux-store";
 
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
@@ -91,20 +91,23 @@ export const setStatus = (status: string) =>
     ({type: SET_STATUS, status} as const)
 
 
-export const getUserProfile = (userId: string) => (dispatch: Dispatch<ActionsType>) => {
+export const getUserProfile = (userId: string): ThunkType =>
+    (dispatch) => {
     usersAPI.getProfile(userId).then((res) => {
         dispatch(setUserProfile(res.data));
     })
 }
 
-export const getStatus = (userId: string) => (dispatch: Dispatch<ActionsType>) => {
+export const getStatus = (userId: string): ThunkType =>
+    (dispatch) => {
     profileAPI.getStatus(userId)
         .then((res) => {
             dispatch(setStatus(res.data));
         })
 }
 
-export const updateStatus = (status: string) => (dispatch: Dispatch<ActionsType>) => {
+export const updateStatus = (status: string): ThunkType =>
+    (dispatch) => {
     profileAPI.updateStatus(status)
         .then((res) => {
             if (res.data.resultCode === 0) {
