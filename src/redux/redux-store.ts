@@ -7,6 +7,7 @@ import authReducer from "./auth-reduser";
 import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form'
 import {ActionsType} from "./store";
+import appReducer from "./app-reduser";
 
 
 let rootReducer = combineReducers({
@@ -15,7 +16,8 @@ let rootReducer = combineReducers({
     navbarPage: navbarReducer,
     users: usersReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>;

@@ -1,19 +1,19 @@
 import React from "react";
 import {
-    follow, getUsers,
+    follow,
+    getUsers,
+    InitialStateType,
     setCurrentPage,
     toggleIsFollowingProgress,
     unfollow,
 } from "../../redux/users-reduser";
 import {connect} from "react-redux";
-import {InitialStateType} from "../../redux/users-reduser";
 import {AppStateType} from "../../redux/redux-store";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
-import Dialogs from "../Dialogs/Dialogs";
 
 type MapStatePropsType = {
     usersPage: InitialStateType
@@ -43,8 +43,6 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
     }
 
     render() {
-        if(!this.props.isAuth) return <Redirect to={'/login'} />
-
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
@@ -73,7 +71,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 
 export default compose<React.ComponentType>(
-    withAuthRedirect,
+    //withAuthRedirect,
     connect(mapStateToProps, {
         follow, unfollow, setCurrentPage,
         toggleIsFollowingProgress, getUsers

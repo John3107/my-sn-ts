@@ -39,9 +39,9 @@ export const setAuthUserData = (userId: number | null,
     ({type: 'SET-AUTH-USER-DATA',
         payload: {userId, email, login, isAuth}}as const)
 
-export const getAuthUserData = (): ThunkType =>
-    (dispatch) => {
-    authAPI.me()
+export const getAuthUserData = () =>
+    (dispatch: ThunkDispatch<AppStateType, unknown, ActionsType | FormAction>) => {
+    return authAPI.me()
         .then((response) => {
             if (response.data.resultCode === 0) {
                 let {id, login, email} = response.data.data;

@@ -14,6 +14,7 @@ import {
     unfollowSuccess,
 } from "./users-reduser";
 import {setAuthUserData} from "./auth-reduser";
+import {initializedSuccess} from "./app-reduser";
 
 
 export let store: StoreType = {
@@ -129,7 +130,8 @@ export type ActionsType = ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof toggleIsFollowingProgress> |
     ReturnType<typeof setStatus> |
-    ReturnType<typeof setAuthUserData>
+    ReturnType<typeof setAuthUserData> |
+    ReturnType<typeof initializedSuccess>
 
 
 
